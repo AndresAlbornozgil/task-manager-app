@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const API_URL = "http://localhost:5000/api/tasks";
 
 const UserDashboard = () => {
-  // 🧱 State management for tasks and input
+  // State management for tasks and input
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const navigate = useNavigate();
