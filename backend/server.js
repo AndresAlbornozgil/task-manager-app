@@ -2,9 +2,14 @@
 require("dotenv").config();
 
 // Import required dependencies
-const express = require("express"); // Imports Express
-const cors = require("cors"); // Imports CORS (Cross-Origin Resource Sharing) - Allows frontend & backend communication
-const connectDB = require("./config/connectDB"); // Import the MongoDB connection function
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./config/connectDB");
+
+// Import routes and middleware
+const userRoutes = require("./routes/userRoutes"); // <-- your auth routes
+const taskRoutes = require("./routes/taskRoutes");
+const authMiddleware = require("./middleware/authMiddleware");
 
 // Initialize Express app
 const app = express();
@@ -13,13 +18,13 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(express.json()); // Enables JSON request body parsing
-app.use(cors()); // Allows cross-origin requests
+app.use(cors());
+app.use(express.json());
 
-// Load all task-related routes
-const taskRoutes = require("./routes/taskRoutes");
-app.use("/api/tasks", taskRoutes);
+// Routes
+app.use("/api/auth", userRoutes); // <-- use this for login/register
+app.use("/api/tasks", authMiddleware, taskRoutes); // Protect task routes
 
-// Start the server on the defined PORT
+// Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
