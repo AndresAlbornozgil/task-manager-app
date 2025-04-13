@@ -4,7 +4,7 @@ require("dotenv").config();
 // Import required dependencies
 const express = require("express");
 const cors = require("cors");
-const connectDB = require("./config/connectDB");
+const connectDB = require("./config/db");
 
 // Import routes and middleware
 const userRoutes = require("./routes/userRoutes"); // <-- your auth routes

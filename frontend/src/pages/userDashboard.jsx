@@ -1,28 +1,23 @@
-// Import necessary libraries and hooks
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// API endpoint for tasks
-const API_URL = "http://localhost:5000/api/tasks";
+const API_URL = import.meta.env.VITE_API_URL + "/tasks";
 
 const UserDashboard = () => {
-  // State management for tasks and input
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const navigate = useNavigate();
 
-  // Check for token and fetch tasks when component loads
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/"); // Redirect to login if not authenticated
+      navigate("/");
     } else {
       fetchTasks(token);
     }
   }, []);
 
-  // Fetch all tasks from the backend
   const fetchTasks = async (token) => {
     try {
       const response = await axios.get(API_URL, {
@@ -34,7 +29,6 @@ const UserDashboard = () => {
     }
   };
 
-  // Add a new task
   const handleAddTask = async () => {
     if (!newTask.trim()) return;
     try {
@@ -53,7 +47,6 @@ const UserDashboard = () => {
     }
   };
 
-  // Delete a task by ID
   const handleDeleteTask = async (id) => {
     try {
       const token = localStorage.getItem("token");
@@ -66,17 +59,14 @@ const UserDashboard = () => {
     }
   };
 
-  // Log out and clear token
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
 
-  // Render UI
   return (
     <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
       <div className="w-full max-w-xl bg-white p-6 rounded shadow">
-        {/* Header section */}
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-blue-600">Your Tasks</h1>
           <button
@@ -86,8 +76,6 @@ const UserDashboard = () => {
             Logout
           </button>
         </div>
-
-        {/* Input field for adding new tasks */}
         <div className="flex mb-4 gap-2">
           <input
             type="text"
@@ -103,8 +91,6 @@ const UserDashboard = () => {
             Add
           </button>
         </div>
-
-        {/* Task list section */}
         <ul>
           {tasks.length > 0 ? (
             tasks.map((task) => (
@@ -117,6 +103,7 @@ const UserDashboard = () => {
                   onClick={() => handleDeleteTask(task._id)}
                   className="text-red-500 hover:text-red-700"
                 >
+                  Delete
                 </button>
               </li>
             ))

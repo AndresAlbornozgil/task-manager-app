@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-const API_URL = "http://localhost:5000/api/auth/register";
+const API_URL = import.meta.env.VITE_API_URL + "/auth/register";
 
 const UserSignup = () => {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Handle signup submission
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(API_URL, { name, email, password });
-      navigate("/"); // Redirect to login after successful signup
+      await axios.post(API_URL, { email, password });
+      navigate("/"); // Redirect to login
     } catch (err) {
       setError("Signup failed. Try again.");
     }
@@ -25,20 +23,8 @@ const UserSignup = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
       <h1 className="text-3xl font-bold text-green-600 mb-4">Sign Up</h1>
-
-      {/* Error Message */}
       {error && <p className="text-red-500">{error}</p>}
-
-      {/* Signup Form */}
       <form onSubmit={handleSignup} className="bg-white shadow-md rounded-lg p-6 w-80">
-        <input
-          type="text"
-          placeholder="Full Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full px-3 py-2 border rounded-md mb-3"
-          required
-        />
         <input
           type="email"
           placeholder="Email"
@@ -59,10 +45,8 @@ const UserSignup = () => {
           Sign Up
         </button>
       </form>
-
-      {/* Login Link */}
       <p className="mt-4 text-gray-600">
-        Already have an account? <a href="/" className="text-green-500">Login</a>
+        Already have an account? <Link to="/" className="text-green-500">Login</Link>
       </p>
     </div>
   );
