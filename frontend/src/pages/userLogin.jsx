@@ -23,7 +23,7 @@ const UserLogin = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-blue-600 mb-4">Login</h1>
+      <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome</h1>
       {error && <p className="text-red-500">{error}</p>}
       <form onSubmit={handleLogin} className="bg-white shadow-md rounded-lg p-6 w-80">
         <input
@@ -42,7 +42,7 @@ const UserLogin = () => {
           className="w-full px-3 py-2 border rounded-md mb-3"
           required
         />
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+        <button type="submit" className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 cursor-pointer">
           Login
         </button>
       </form>
