@@ -19,7 +19,7 @@ Deployed on [...](...)
 
 Once running locally, users can sign up, log in, and begin managing tasks via the dashboard. Tasks can be added, deleted, and reordered with a simple drag-and-drop interface.
 
-![image of portfolio website](src/assets/images/react-portfolio-cover.JPG)
+![image of Taskflo](...)
 
 ## Credits
 Andres Albornoz
