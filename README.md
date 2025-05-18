@@ -26,3 +26,9 @@ Andres Albornoz
 
 ## License
 This project has an MIT license.
+
+## How to Contribute
+If you'd like to collaborate on future enhancements or projects, feel free to reach out via GitHub!
+
+## Tests
+Tested locally using manual task creation, login/logout, and drag-and-drop functionality across various devices and screen sizes.
